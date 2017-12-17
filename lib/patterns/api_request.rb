@@ -12,6 +12,7 @@ module Patterns
   # other options passed through named args:
   # quiet: true # fail silently, swallow exceptions (but notify Rollbar)
   # timeout: 120 # set timeout val (seconds) for this request
+  # notifier: optional dependecy-injected object for error/exception notifications - object should conform to Rollbar api
 
   class ApiRequest
     attr_reader :code, :headers, :body, :raw_body, :error
@@ -30,18 +31,19 @@ module Patterns
                       params: nil,
                       token: nil,
                       quiet: nil,
-                      timeout: nil)
+                      timeout: nil,
+                      notifier: nil)
 
         request_headers = DEFAULT_REQUEST_HEADERS.merge(headers)
         request_headers.reverse_merge!("Authorization" => token) if token.present?
 
-        new(quiet: quiet, timeout: timeout).tap do |req|
+        new(quiet: quiet, timeout: timeout, notifier: notifier).tap do |req|
           req.http_request(method, endpoint_uri, request_headers, params)
         end
       end
 
-      def method_missing(method, *args)
-        return http_request(method, *args) if ALLOWED_METHODS.include?(method)
+      def method_missing(method, *args, &block)
+        return http_request(method, *args, &block) if ALLOWED_METHODS.include?(method)
         super
       end
     end
@@ -90,17 +92,20 @@ module Patterns
     end
 
     def notify_exception(e)
-      Notifier.error("ApiRequest Exception", e)
+      notifier.error("ApiRequest Exception", e)
     end
 
     def notify_error
-      Notifier.error("ApiRequest Error", response_code: code, response_body: body, error: error)
+      notifier.error("ApiRequest Error", response_code: code, response_body: body, error: error)
     end
 
     def raise_error
       raise "ApiRequest Error #{code}: #{error}"
     end
 
+    def notifier
+      @opts[:notifier] || Notifier.new
+    end
   end
 
 end

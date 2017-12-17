@@ -12,5 +12,8 @@ module Patterns
     class << self
       delegate *Rollbar::PUBLIC_NOTIFIER_METHODS, to: Rollbar
     end
+
+    # forward methods on the instance to the class
+    delegate_missing_to :class
   end
 end
