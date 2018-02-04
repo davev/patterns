@@ -31,7 +31,69 @@ Or install it yourself as:
 
 ## Usage
 
-TODO:
+#### Service Mixin
+1. set up a service object class and include the Service mixin.  the return value of the call method will be accessible through the result attribute.  see source for advanced usage.
+
+```ruby
+  class GreetWorld
+    include Patterns::Service
+
+    def initialize(msg)
+      @msg = msg
+    end
+
+    def call
+      return @msg
+    end
+  end
+```
+
+2. invoke service class (mixin provides nice syntax for invocation)
+```ruby
+  res = GreetWorld.call("hello")
+```
+
+3. mixin provides common interface for retrieving result, status, and error.
+```ruby
+  res.result
+  # => "hello"
+
+  res.success?
+  # => true
+
+  res.error
+  # => nil
+
+  # if an error occurred while executing service code:
+  res.error
+  # => "the stack overflowed"
+```
+
+#### ApiRequest Class
+ApiRequest api matches the [Unirest](http://unirest.io/ruby.html) interface.  see source for advanced usage.
+
+```ruby
+  response = Patterns::ApiRequest.get(
+    endpoint_url,
+    params: {
+      client_id: @client.id
+    }
+  )
+
+  response.body if response.success?
+```
+
+#### Notifier Class
+Notifier api matches the [Rollbar](https://rollbar.com/docs/notifier/rollbar-gem/) interface.
+```ruby
+  begin
+    # do stuff
+  rescue => e
+    Notifier.error(e, e.message, client_id: @client.id)
+  end
+```
+
+
 
 ## Development
 
