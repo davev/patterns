@@ -84,7 +84,7 @@ ApiRequest api matches the [Unirest](http://unirest.io/ruby.html) interface.  se
 ```
 
 #### Notifier Class
-Notifier api matches the [Rollbar](https://rollbar.com/docs/notifier/rollbar-gem/) interface.
+Notifier api matches the [Rollbar](https://rollbar.com/docs/notifier/rollbar-gem/) interface.  Assumes the pertinent ENV vars are set with credentials for the notifier service being used, e.g. Rollbar.
 ```ruby
   begin
     # do stuff
