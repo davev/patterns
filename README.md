@@ -2,7 +2,7 @@
 
 A collection of reusable Ruby objects for Rails applications.
 * Service object module (to be used as a mixin)
-* ApiRequest class (matches interface of Unirest)
+* ApiRequest class to wrap HTTP requests (matches interface of Unirest)
 * Notifier class (for reporting to bug tracking services, matches interface of Rollbar)
 
 ## Inspiration
@@ -18,7 +18,7 @@ A collection of reusable Ruby objects for Rails applications.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'fifteenthirty-patterns'
+gem '1530_patterns'
 ```
 
 And then execute:
@@ -27,7 +27,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install fifteenthirty-patterns
+    $ gem install 1530_patterns
 
 ## Usage
 
@@ -41,7 +41,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/patterns. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/davev/patterns. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -49,4 +49,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Patterns project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/patterns/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Patterns project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/davev/patterns/blob/master/CODE_OF_CONDUCT.md).
