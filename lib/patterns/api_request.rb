@@ -12,7 +12,8 @@ module Patterns
   # other options passed through named args:
   # quiet: true # fail silently, swallow exceptions (but notify Rollbar)
   # timeout: 120 # set timeout val (seconds) for this request
-  # notifier: optional dependecy-injected object for error/exception notifications - object should conform to Rollbar api
+  # notifier: optional dependecy-injected object for error/exception notifications - object should conform to Rollbar api; setting notifier to false (boolean) prevents notifications from occurring
+
 
   class ApiRequest
     attr_reader :code, :headers, :body, :raw_body, :error
@@ -88,15 +89,15 @@ module Patterns
     def handle_failure
       @error = body || "[blank]"
       notify_error
-      raise_error unless @opts[:quiet]
+      raise_error unless silence_exceptions?
     end
 
     def notify_exception(e)
-      notifier.error("ApiRequest Exception", e)
+      notifier.error("ApiRequest Exception", e) unless silence_notifications?
     end
 
     def notify_error
-      notifier.error("ApiRequest Error", response_code: code, response_body: body, error: error)
+      notifier.error("ApiRequest Error", response_code: code, response_body: body, error: error) unless silence_notifications?
     end
 
     def raise_error
@@ -105,6 +106,14 @@ module Patterns
 
     def notifier
       @opts[:notifier] || Notifier.new
+    end
+
+    def silence_exceptions?
+      @opts[:quiet] == true
+    end
+
+    def silence_notifications?
+      @opts[:notifier] == false
     end
   end
 

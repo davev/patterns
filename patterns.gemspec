@@ -38,7 +38,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "activesupport", "> 4.1"
 
-  # spec.add_runtime_dependency "rails", [">= 4"]
   spec.add_runtime_dependency "unirest", "~> 1.1"
   spec.add_runtime_dependency "rollbar", "~> 2.15"
 end

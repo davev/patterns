@@ -89,6 +89,12 @@ class ApiRequestTest < ActiveSupport::TestCase
     assert_silent { Patterns::ApiRequest.get(@endpoint, quiet: true) }
   end
 
+  test "notifier false option silences notifications" do
+    Unirest.stubs(:get) # will return nil, which will raise exception by default
+    Patterns::ApiRequest.any_instance.expects(:notifier).never
+    assert_raises { Patterns::ApiRequest.get(@endpoint, notifier: false) }
+  end
+
   test "timeout option passes value to Unirest" do
     secs = 99
     Unirest.expects(:timeout).with(secs)
