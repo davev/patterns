@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "patterns/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "1530_patterns"
+  spec.name          = "patterns"
   spec.version       = Patterns::VERSION
   spec.authors       = ["Dave VanderKloot"]
   spec.email         = ["dave@1530design.com"]

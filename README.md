@@ -18,7 +18,7 @@ A collection of reusable Ruby objects for Rails applications.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem '1530_patterns'
+gem "patterns", :git => "https://github.com/davev/patterns.git"
 ```
 
 And then execute:
@@ -27,7 +27,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install 1530_patterns
+    $ gem install patterns
 
 ## Usage
 
