@@ -1,3 +1,5 @@
+require "active_record"
+
 module Validators
   class EmailValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)

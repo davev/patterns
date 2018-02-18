@@ -40,4 +40,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "unirest", "~> 1.1"
   spec.add_runtime_dependency "rollbar", "~> 2.15"
+  spec.add_runtime_dependency "activerecord", "> 4.1"
 end
