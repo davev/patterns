@@ -27,7 +27,9 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install patterns
+    $ git clone https://github.com/davev/patterns.git
+    $ cd patterns && gem build patterns.gemspec
+    $ gem install patterns-0.1.0.gem
 
 ## Usage
 
