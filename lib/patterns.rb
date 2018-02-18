@@ -7,3 +7,5 @@ require "patterns/notifier"
 
 module Patterns
 end
+
+ActiveRecord::Base.send(:include, Validators)
