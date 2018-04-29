@@ -58,4 +58,15 @@ class ServiceTest < ActiveSupport::TestCase
     refute @foo.success?
     assert_equal @foo.error, 'oops'
   end
+
+  test "#fail method extracts string error message for all allowed argument patterns" do
+    assert_raises(RuntimeError) { @foo.fail('oops') }
+    assert_equal @foo.error, 'oops'
+
+    assert_raises(ArgumentError) { @foo.fail(ArgumentError, 'oops2') }
+    assert_equal @foo.error, 'oops2'
+
+    assert_raises(ArgumentError) { @foo.fail(ArgumentError, 'oops3', []) }
+    assert_equal @foo.error, 'oops3'
+  end
 end

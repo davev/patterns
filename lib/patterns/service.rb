@@ -25,7 +25,7 @@ module Patterns
 
     def fail(*args)
       @success = false
-      @error = args.first
+      @error = args.find { |arg| arg.is_a?(String) }
       super # call ruby's fail method and pass *args
     end
 
