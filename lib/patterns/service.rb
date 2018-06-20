@@ -32,6 +32,7 @@ module Patterns
     # error state without raising exception
     def err(msg = nil)
       @success = false
+      @result = nil
       @error = msg
     end
   end
